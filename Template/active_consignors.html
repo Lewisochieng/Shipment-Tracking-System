@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>ACTIVE</h4>
+
+{% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Total Quantity</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consignor in active_consignors %}
+        <tr>
+            <td>{{ consignor.name }}</td>
+            <td>{{ consignor.total_quantity }}</td>
+            <td>{{ consignor.updated_at }}</td>
+            <td>
+                <a href="{% url 'consignor_edit' consignor.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

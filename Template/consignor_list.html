@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>DASHBOARD</h3>
+<a href="{% url 'consignor_add' %}" class="btn btn-secondary my-2 mb-4">Add Consignor</a>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Ticket Number</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Total Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consignor in consignors %}
+        <tr>
+            <td>{{ consignor.ticket_number }}</td>
+            <td>{{ consignor.name }}</td>
+            <td>{% if consignor.is_active %}Active{% else %}Archived{% endif %}</td>
+            <td>{{ consignor.total_quantity }}</td>
+            <td>
+                <a href="{% url 'consignor_edit' consignor.pk %}" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
